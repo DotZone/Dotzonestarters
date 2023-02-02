@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>{{ config('app.name', 'Dotzone Group') }} | {{ __('messages.dotzoneGroup') }}</title>
+    <title>{{ config('dotzone.cms_name') }} | {{ __('messages.dotzoneGroup') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
