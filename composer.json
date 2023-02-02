@@ -13,6 +13,7 @@
             "DotZone\\Dotzonestarters\\": "src"
         }
     },
+    "minimum-stability": "dev",
     "extra": {
         "laravel": {
             "providers": [
