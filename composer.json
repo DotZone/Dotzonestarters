@@ -1,6 +1,6 @@
 {
     "name": "dotzone/dotzonestarters",
-    "description": "Laravel Starter Kits with extra functions",
+    "description": "DotZone Starters is a package that contains all the basic files and folders that are needed to start a new project.",
     "license": "MIT",
     "authors": [
         {
@@ -19,6 +19,5 @@
                 "DotZone\\Dotzonestarters\\DotzonestartersServiceProvider"
             ]
         }
-    },
-    "version": "1.0.0"
+    }
 }
