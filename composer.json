@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "DotZone\\Darastarters\\": "src"
+            "DotZone\\Dotzonestarters\\": "src"
         }
     },
     "extra": {
