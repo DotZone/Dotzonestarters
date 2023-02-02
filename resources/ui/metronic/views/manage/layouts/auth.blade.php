@@ -11,9 +11,9 @@
     <meta name="robots" content="index, nofollow">
     <link rel="icon" href="{{ Config::get('settings.site_favicon') }}" type="image/png">
     <!--Begin::CSS-->
-    <link href="{{ asset('css/custom.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('css/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('manage/css/custom.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('manage/css/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('manage/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
     @yield('styles')
 
 </head>
@@ -21,8 +21,8 @@
 
 @yield('content')
 
-<script src="{{ asset('js/plugins.bundle.js') }}"></script>
-<script src="{{ asset('js/scripts.bundle.js') }}"></script>
+<script src="{{ asset('manage/js/plugins.bundle.js') }}"></script>
+<script src="{{ asset('manage/js/scripts.bundle.js') }}"></script>
 @yield('scripts')
 </body>
 </html>

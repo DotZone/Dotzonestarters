@@ -8,8 +8,8 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
         <a href="{{ route('tenant.dashboard') }}">
-            <img alt="Logo" src="{{ asset('images/dark-no-bg-2.png') }}" class="h-150px app-sidebar-logo-default"/>
-            <img alt="Logo" src="{{ asset('images/icon-only.png') }}" class="h-20px app-sidebar-logo-minimize">
+            <img alt="Logo" src="{{ asset('manage/images/dark-no-bg-2.png') }}" class="h-150px app-sidebar-logo-default"/>
+            <img alt="Logo" src="{{ asset('manage/images/icon-only.png') }}" class="h-20px app-sidebar-logo-minimize">
         </a>
         <!--end::Logo image-->
         <!--begin::Aside toggler-->

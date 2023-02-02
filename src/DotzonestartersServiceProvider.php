@@ -2,6 +2,7 @@
 
 namespace DotZone\Dotzonestarters;
 
+use DotZone\Dotzonestarters\Console\GeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 use DotZone\Dotzonestarters\Console\InstallCommand;
 
@@ -37,6 +38,7 @@ class DotzonestartersServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 InstallCommand::class,
+                GeneratorCommand::class,
             ]);
         }
     }

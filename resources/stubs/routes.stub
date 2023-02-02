@@ -1,6 +1,10 @@
-Route::redirect('/', '/login');
 
-Route::middleware('auth')->group(function () {
+Route::group(
+    [
+        'prefix' => config('dotzone.cms_route_prefix'),
+        'middleware' => ['auth']
+    ], function(){
+
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');

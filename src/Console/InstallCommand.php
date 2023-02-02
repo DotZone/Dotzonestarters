@@ -77,14 +77,15 @@ class InstallCommand extends Command
         copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
 
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/controllers', app_path('Http/Controllers/'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/controllers', app_path('Http/Controllers/'));
 
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/requests', app_path('Http/Requests/'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/requests', app_path('Http/Requests/'));
 
-        copy(__DIR__ . '/../../resources/stubs/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
-        copy(__DIR__ . '/../../resources/stubs/ui/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__ . '/../../resources/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+        copy(__DIR__ . '/../../resources/ui/vite.config.js', base_path('vite.config.js'));
 
+        $this->overwriteDotzoneConfig();
 
         if ($role_permissions === 'yes') {
             $this->installLaratrust();
@@ -102,32 +103,34 @@ class InstallCommand extends Command
 
         $this->components->info('Installing Metronic Theme');
         // Views...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth/passwords'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/includes'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/manage/auth'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/manage/auth/passwords'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/manage/layouts'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/manage/includes'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/front'));
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/views/auth', resource_path('views/auth'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/views/auth/passwords', resource_path('views/auth/passwords'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/views/layouts', resource_path('views/layouts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/views/includes', resource_path('views/includes'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/views/manage/auth', resource_path('views/manage/auth'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/views/manage/auth/passwords', resource_path('views/manage/auth/passwords'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/views/manage/layouts', resource_path('views/manage/layouts'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/views/manage/includes', resource_path('views/manage/includes'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/views/front', resource_path('views/front'));
 
         // Assets
-        (new Filesystem)->ensureDirectoryExists(resource_path('js'));
-        (new Filesystem)->ensureDirectoryExists(public_path('css'));
-        (new Filesystem)->ensureDirectoryExists(public_path('js'));
-        (new Filesystem)->ensureDirectoryExists(public_path('images'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('manage/js'));
+        (new Filesystem)->ensureDirectoryExists(public_path('manage/css'));
+        (new Filesystem)->ensureDirectoryExists(public_path('manage/js'));
+        (new Filesystem)->ensureDirectoryExists(public_path('manage/images'));
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/css', public_path('css'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/js', public_path('js'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/metronic/images', public_path('images'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/manage/css', public_path('manage/css'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/manage/js', public_path('manage/js'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/ui/metronic/manage/images', public_path('manage/images'));
 
-        copy(__DIR__ . '/../../resources/stubs/ui/metronic/views/home.blade.php', resource_path('views/home.blade.php'));
-        copy(__DIR__ . '/../../resources/stubs/ui/metronic/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
+        copy(__DIR__ . '/../../resources/ui/metronic/views/manage/home.blade.php', resource_path('views/manage/home.blade.php'));
+        copy(__DIR__ . '/../../resources/ui/metronic/views/manage/dashboard.blade.php', resource_path('views/manage/dashboard.blade.php'));
 
         // Demo table
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/users'));
-        copy(__DIR__ . '/../../resources/stubs/ui/metronic/views/users/index.blade.php', resource_path('views/users/index.blade.php'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/manage/pages/users'));
+        copy(__DIR__ . '/../../resources/ui/metronic/views/manage/pages/users/index.blade.php', resource_path('views/manage/pages/users/index.blade.php'));
 
         // $this->runCommands(['npm install', 'npm run build']);
         $this->components->info('Dotzone UI scaffolding replaced successfully.');
@@ -145,6 +148,18 @@ class InstallCommand extends Command
         shell_exec("{$this->php_version} artisan migrate");
 
         $this->components->info('Laratrust installed successfully.');
+    }
+
+    protected function overwriteDotzoneConfig()
+    {
+        $this->components->info('Overwriting Dotzone config file...');
+
+        // Overwrite the RouteServiceProvider
+        $routeProvider = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
+        $config = str_replace(['/home'],['/dashboard'],$routeProvider);
+        file_put_contents(app_path('Providers/RouteServiceProvider.php'), $config);
+
+        $this->components->info('Dotzone config file overwritten successfully.');
     }
 
     /**

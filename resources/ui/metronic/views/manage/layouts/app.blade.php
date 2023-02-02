@@ -12,9 +12,9 @@
     <link rel="icon" href="{{ Config::get('settings.site_favicon') }}" type="image/png">
     <!--Begin::CSS-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <link href="{{ asset('css/custom.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('manage/css/custom.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('manage/css/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('manage/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!-- Scripts -->
     @yield('styles')
 </head>
@@ -50,12 +50,12 @@
         <!--begin::Page-->
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
             <!--begin::Header-->
-            @include('includes.header')
+            @include('manage.includes.header')
             <!--end::Header-->
             <!--begin::Wrapper-->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 <!--begin::Aside-->
-                @include('includes.sidebar')
+                @include('manage.includes.sidebar')
                 <!--end::Aside-->
                 <!--begin::Main-->
                 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -63,7 +63,7 @@
                         @yield('content')
                     </div>
                     <!--begin::Footer-->
-                    @include('includes.footer')
+                    @include('manage.includes.footer')
                     <!--end::Footer-->
                 </div>
             </div>
@@ -73,11 +73,11 @@
     </div>
 
 
-    <script src="{{ asset('js/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('js/scripts.bundle.js') }}"></script>
-    <script src="{{ asset('js/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/datatable.helpers.js') }}"></script>
-    <script src="{{ asset('js/general.js') }}"></script>
+    <script src="{{ asset('manage/js/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('manage/js/scripts.bundle.js') }}"></script>
+    <script src="{{ asset('manage/js/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('manage/js/datatable.helpers.js') }}"></script>
+    <script src="{{ asset('manage/js/general.js') }}"></script>
     @yield('scripts')
 </body>
 

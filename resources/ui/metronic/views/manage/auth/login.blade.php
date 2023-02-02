@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('manage.layouts.auth')
 
 @section('title', __('messages.auth.login'))
 
@@ -15,11 +15,11 @@
                     <div class="w-lg-500px p-10">
                         <!--begin::Sign in Form-->
                         <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate"
-                              id="kt_sign_in_form" method="POST" action="{{ route('tenant.login') }}">
+                              id="kt_sign_in_form" method="POST" action="{{ route('login') }}">
                             @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-11">
-                                <img alt="Logo" src="{{ url('/backend/media/dotzone/dark-no-bg.png') }}"
+                                <img alt="Logo" src="{{ asset('manage/images/dark-no-bg.png') }}"
                                      class="h-250px">
                                 <!--begin::Title-->
                                 <h4 class="text-dark fw-bolder mb-3">Welcome to Dotzone</h4>
@@ -97,12 +97,12 @@
             <!--end::Body-->
             <!--begin::Aside-->
             <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
-                 style="background-image: url({{ asset('images/cover-2.jpg') }})">
+                 style="background-image: url({{ asset('manage/images/cover-2.jpg') }})">
                 <!--begin::Content-->
                 <div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
                     <!--begin::Logo-->
                     <a href="/" class="mb-12">
-                        <img alt="Logo" src="{{ asset('images/dark-no-bg.png') }}" class="h-250px">
+                        <img alt="Logo" src="{{ asset('manage/images/dark-no-bg.png') }}" class="h-250px">
                     </a>
                     <!--end::Logo-->
                     <!--begin::Title-->
