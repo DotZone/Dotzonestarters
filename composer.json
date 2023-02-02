@@ -1,0 +1,24 @@
+{
+    "name": "dotzone/dotzonestarters",
+    "description": "Laravel Starter Kits with extra functions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmad Chebbo",
+            "email": "ahmad.m.shebbo@dotzonegrp.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DotZone\\Darastarters\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DotZone\\Dotzonestarters\\DotzonestartersServiceProvider"
+            ]
+        }
+    },
+    "version": "1.0.0"
+}
