@@ -64,12 +64,22 @@ class GeneratorCommand extends Command
         }
 
         $view = $this->components->choice(
-            'Do you want to generate a view?',
+            'Do you want to generate views?',
+            ['yes', 'no'],
+            0
+        );
+
+        $controller = $this->components->choice(
+            'Do you want to generate controller?',
             ['yes', 'no'],
             0
         );
 
         $command = "{$this->php_version} artisan make:model {$name} -m";
+
+        if ($controller === 'yes') {
+            $command .= ' -c';
+        }
 
         shell_exec($command);
 
