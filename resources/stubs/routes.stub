@@ -8,4 +8,6 @@ Route::group(
     Route::view('dashboard', 'manage.dashboard')->name('dashboard');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+
+    // Addition routes
 });

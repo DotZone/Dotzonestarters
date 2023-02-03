@@ -49,7 +49,24 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->php_version = $this->option('php_version');
+        try {
+            $this->php_version = $this->option('php_version');
+            $this->installDotzoneStarter();
+        } catch (RuntimeException $e) {
+            $this->components->error($e->getMessage());
+            return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * Install the DotzoneStarter.
+     *
+     * @return void
+     */
+    protected function installDotzoneStarter()
+    {
         // Ask for the Theme installation
         $theme = $this->components->choice(
             'Which design theme you want to use?',
@@ -65,6 +82,8 @@ class InstallCommand extends Command
         // Install the required packages
         $this->requireComposerPackages('laravel/ui:^4.0');
         shell_exec("{$this->php_version} artisan ui bootstrap --auth");
+        $this->requireComposerPackages('yajra/laravel-datatables-oracle');
+
         // Copy the routes file to the routes folder
         file_put_contents(
             base_path('routes/web.php'),
@@ -73,10 +92,7 @@ class InstallCommand extends Command
         );
         // Copy the Controllers folder to the app/Http folder
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/controllers', app_path('Http/Controllers/'));
-        // Copy the Requests folder to the app/Http folder
-        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/requests', app_path('Http/Requests/'));
-        // Copy the AppServiceProvider.php file to the app/Providers folder 
+        // Copy the AppServiceProvider.php file to the app/Providers folder
         copy(__DIR__ . '/../../resources/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
         // Copy the vite.config.js file to the root folder
         copy(__DIR__ . '/../../resources/ui/vite.config.js', base_path('vite.config.js'));
@@ -87,13 +103,17 @@ class InstallCommand extends Command
         // Check if the user wants to install Metronic Theme
         if ($theme === 'metronic') $this->replaceWithMetronicTheme();
         // Update the config/dotzone.php file to set the installed flag to true
-        $this->updateDotzoneConfig();
+        $this->updateDotzoneConfig($role_permissions);
         // Move the config/dotzone.php file to the config folder
         copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
-
-        return 0;
     }
 
+    /**
+     * Install the metronic theme.
+     *
+     * @param  string  $packages
+     * @return void
+     */
     protected function replaceWithMetronicTheme()
     {
 
@@ -132,20 +152,39 @@ class InstallCommand extends Command
         $this->components->info('Dotzone UI scaffolding replaced successfully.');
     }
 
+    /**
+     * Install the laratrust package.
+     *
+     * @param  string  $packages
+     * @return void
+     */
     protected function installLaratrust()
     {
         $this->components->info('Installing Laratrust...');
 
-        $this->requireComposerPackages('santigarcor/laratrust');
-        shell_exec("{$this->php_version} artisan vendor:publish --provider=\"Santigarcor\Laratrust\LaratrustServiceProvider\"");
-        shell_exec("{$this->php_version} artisan laratrust:setup");
-        shell_exec("{$this->php_version} artisan laratrust:seeder");
-        shell_exec("{$this->php_version} artisan vendor:publish --tag=\"laratrust-seeder\"");
-
+        try {
+            $this->requireComposerPackages('santigarcor/laratrust');
+            // wait for the package to be installed
+            sleep(5);
+            shell_exec("{$this->php_version} artisan vendor:publish --provider=\"Santigarcor\Laratrust\LaratrustServiceProvider\"");
+            $this->components->info('Laratrust setup successfully. Please press enter to continue.');
+            shell_exec("{$this->php_version} artisan laratrust:setup");
+            shell_exec("{$this->php_version} artisan laratrust:seeder");
+            shell_exec("{$this->php_version} artisan vendor:publish --tag=\"laratrust-seeder\"");
+        } catch (\Exception $e) {
+            $this->components->error('Laratrust installation failed.');
+            $this->components->error($e->getMessage());
+            return;
+        }
         $this->components->info('Laratrust installed successfully.');
         $this->components->info('Please run php artisan migrate.');
     }
 
+    /**
+     * Overwrite the default RouteServiceProvider.php file.
+     *
+     * @return void
+     */
     protected function overwriteServiceProviders()
     {
         $this->components->info('Overwriting Dotzone config file...');
@@ -156,13 +195,23 @@ class InstallCommand extends Command
         $this->components->info('Dotzone config file overwritten successfully.');
     }
 
-    protected function updateDotzoneConfig()
+    /**
+     * Update the config/dotzone.php file to set the installed flag to true.
+     *
+     * @param  string  $role_permissions
+     * @return void
+     */
+    protected function updateDotzoneConfig($role_permissions)
     {
         $this->components->info('Updating Dotzone config file...');
 
         // Update the config/dotzone.php file to set the installed flag to true
         $dotzoneConfig = file_get_contents(config_path('dotzone.php'));
+
         $config = str_replace(['\'installed\' => false'],['\'installed\' => true'],$dotzoneConfig);
+        if ($role_permissions === 'yes') {
+            $config = str_replace(['\'role_permission\' => false'],['\'role_permission\' => true'],$config);
+        }
         file_put_contents(config_path('dotzone.php'), $config);
 
         $this->components->info('Dotzone config file updated successfully.');

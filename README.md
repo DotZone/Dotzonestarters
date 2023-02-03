@@ -41,6 +41,8 @@ In the current version, there is 1 role-based access control package supported.
 
 - [Laratrust - Santigarcor](https://laratrust.santigarcor.me)
 
+## Credit
 
+- [Larastarters - LaravelDaily](https://github.com/LaravelDaily/Larastarters)
 
 ---

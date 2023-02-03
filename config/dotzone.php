@@ -7,7 +7,7 @@ return [
     | CMS name
     |--------------------------------------------------------------------------
     */
-    
+
     'cms_name' => 'Dotzone Starter',
 
     /*
@@ -42,6 +42,7 @@ return [
     */
 
     'installed' => false,
+    'role_permission' => false,
 
 
     /*
@@ -59,7 +60,7 @@ return [
 	    */
 
 	    'styles' => [
-	    	
+
 	    ],
 
 
@@ -70,7 +71,7 @@ return [
 	    */
 
 	    'scripts' => [
-	    	
+
 	    ],
     ],
 
