@@ -49,6 +49,12 @@ class GeneratorCommand extends Command
      */
     public function handle()
     {
+
+        // Check if the package is installed or not
+        if (!config('dotzone.installed')) {
+            throw new RuntimeException('The package is not installed yet. Run `php artisan dotzonestarters:install` first.');
+        }
+
         $this->php_version = $this->option('php_version');
         
         $name = $this->components->ask('What is the name of the model?');

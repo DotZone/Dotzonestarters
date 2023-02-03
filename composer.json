@@ -1,11 +1,14 @@
 {
     "name": "dotzone/dotzonestarters",
     "description": "DotZone Starters is a package that contains all the basic files and folders that are needed to start a new project.",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
+            "role": "Developer",
             "name": "Ahmad Chebbo",
-            "email": "ahmad.m.shebbo@dotzonegrp.com"
+            "email": "ahmad.m.shebbo@dotzonegrp.com",
+            "homepage": "https://dotzonegrp.com"
         }
     ],
     "autoload": {
@@ -13,6 +16,11 @@
             "DotZone\\Dotzonestarters\\": "src"
         }
     },
+    "require": {
+        "laravel/framework": "^9.0",
+        "php": "^8.0"
+      },
+    "require-dev": {},
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
@@ -21,5 +29,10 @@
                 "DotZone\\Dotzonestarters\\DotzonestartersServiceProvider"
             ]
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
     }
 }

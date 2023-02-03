@@ -5,7 +5,7 @@ Route::group(
         'middleware' => ['auth']
     ], function(){
 
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::view('dashboard', 'manage.dashboard')->name('dashboard');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 });

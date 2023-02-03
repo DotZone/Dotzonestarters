@@ -33,7 +33,7 @@ In the current version, there is 1 theme supported.
 
 **Bootstrap Themes with Laravel UI**
 
-- [Metronic - Bootstrap 5](https://https://keenthemes.com/metronic8/)
+- [Metronic - Bootstrap 5](https://keenthemes.com/metronic8/)
 
 ## Role Permissions
 

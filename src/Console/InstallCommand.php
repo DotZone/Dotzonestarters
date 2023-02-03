@@ -50,50 +50,46 @@ class InstallCommand extends Command
     public function handle()
     {
         $this->php_version = $this->option('php_version');
-        
+        // Ask for the Theme installation
         $theme = $this->components->choice(
             'Which design theme you want to use?',
             ['metronic'],
             0
         );
-
+        // Ask for the Role Permissions installation
         $role_permissions = $this->components->choice(
             'Do you want to add role permissions?',
             ['yes', 'no'],
             1
         );
-
+        // Install the required packages
         $this->requireComposerPackages('laravel/ui:^4.0');
         shell_exec("{$this->php_version} artisan ui bootstrap --auth");
-
-
+        // Copy the routes file to the routes folder
         file_put_contents(
             base_path('routes/web.php'),
             file_get_contents(__DIR__ . '/../../resources/stubs/routes.stub'),
             FILE_APPEND
         );
-
-        // Move the config/dotzone.php file to the config folder
-        copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
-
-
+        // Copy the Controllers folder to the app/Http folder
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/controllers', app_path('Http/Controllers/'));
-
+        // Copy the Requests folder to the app/Http folder
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/requests', app_path('Http/Requests/'));
-
+        // Copy the AppServiceProvider.php file to the app/Providers folder 
         copy(__DIR__ . '/../../resources/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+        // Copy the vite.config.js file to the root folder
         copy(__DIR__ . '/../../resources/ui/vite.config.js', base_path('vite.config.js'));
-
-        $this->overwriteDotzoneConfig();
-
-        if ($role_permissions === 'yes') {
-            $this->installLaratrust();
-        }
-
-        if ($theme === 'metronic') {
-            $this->replaceWithMetronicTheme();
-        }
+        // Overwrite the default RouteServiceProvider.php file
+        $this->overwriteServiceProviders();
+        // Check if the user wants to install Laratrust
+        if ($role_permissions === 'yes') $this->installLaratrust();
+        // Check if the user wants to install Metronic Theme
+        if ($theme === 'metronic') $this->replaceWithMetronicTheme();
+        // Update the config/dotzone.php file to set the installed flag to true
+        $this->updateDotzoneConfig();
+        // Move the config/dotzone.php file to the config folder
+        copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
 
         return 0;
     }
@@ -145,21 +141,31 @@ class InstallCommand extends Command
         shell_exec("{$this->php_version} artisan laratrust:setup");
         shell_exec("{$this->php_version} artisan laratrust:seeder");
         shell_exec("{$this->php_version} artisan vendor:publish --tag=\"laratrust-seeder\"");
-        shell_exec("{$this->php_version} artisan migrate");
 
         $this->components->info('Laratrust installed successfully.');
+        $this->components->info('Please run php artisan migrate.');
     }
 
-    protected function overwriteDotzoneConfig()
+    protected function overwriteServiceProviders()
     {
         $this->components->info('Overwriting Dotzone config file...');
-
         // Overwrite the RouteServiceProvider
         $routeProvider = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
         $config = str_replace(['/home'],['/dashboard'],$routeProvider);
         file_put_contents(app_path('Providers/RouteServiceProvider.php'), $config);
-
         $this->components->info('Dotzone config file overwritten successfully.');
+    }
+
+    protected function updateDotzoneConfig()
+    {
+        $this->components->info('Updating Dotzone config file...');
+
+        // Update the config/dotzone.php file to set the installed flag to true
+        $dotzoneConfig = file_get_contents(config_path('dotzone.php'));
+        $config = str_replace(['\'installed\' => false'],['\'installed\' => true'],$dotzoneConfig);
+        file_put_contents(config_path('dotzone.php'), $config);
+
+        $this->components->info('Dotzone config file updated successfully.');
     }
 
     /**
