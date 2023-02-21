@@ -17,14 +17,14 @@ use App\Models\{{Name}};
 
 class {{Name}}Controller extends BaseController
 {
-    public function __construct()
-    {
-        // Permissions
-        $this->middleware('permission:{{names}}-read', ['only' => ['index', 'show']]);
-        $this->middleware('permission:{{names}}-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:{{names}}-update', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:{{names}}-delete', ['only' => ['destroy', 'forceDelete']]);
-    }
+//    public function __construct()
+//    {
+//        // Permissions
+//        $this->middleware('permission:{{names}}-read', ['only' => ['index', 'show']]);
+//        $this->middleware('permission:{{names}}-create', ['only' => ['create', 'store']]);
+//        $this->middleware('permission:{{names}}-update', ['only' => ['edit', 'update']]);
+//        $this->middleware('permission:{{names}}-delete', ['only' => ['destroy', 'forceDelete']]);
+//    }
 
     /**
      * Display a listing of the resource.

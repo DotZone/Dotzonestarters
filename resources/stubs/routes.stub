@@ -1,13 +1,11 @@
 
 Route::group(
     [
-        'prefix' => config('dotzone.cms_route_prefix'),
+        'prefix' => config('dotzone.prefixes.manage'),
         'middleware' => ['auth']
     ], function(){
 
     Route::view('dashboard', 'manage.dashboard')->name('dashboard');
-
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     // Addition routes
 });

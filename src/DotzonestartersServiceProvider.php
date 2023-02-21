@@ -25,7 +25,8 @@ class DotzonestartersServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // load the helpers file
+        require_once __DIR__ . '/DotzoneHelpers.php';
     }
 
         /**

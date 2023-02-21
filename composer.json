@@ -14,7 +14,10 @@
     "autoload": {
         "psr-4": {
             "DotZone\\Dotzonestarters\\": "src"
-        }
+        },
+        "files": [
+            "src/DotzoneHelpers.php"
+        ]
     },
     "require": {
         "laravel/framework": "^9.0",

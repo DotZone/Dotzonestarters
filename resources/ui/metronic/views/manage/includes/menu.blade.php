@@ -8,3 +8,5 @@
     </a>
 </div>
 {{-- End::Dashboard --}}
+
+<!-- Add your menu items here -->

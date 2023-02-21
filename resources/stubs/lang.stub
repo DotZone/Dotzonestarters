@@ -1,0 +1,10 @@
+    // {{Names}} keys
+    '{{name}}'              => [
+        '{{names}}'   => '{{Names}}',
+        '{{name}}'    => '{{Name}}',
+        'new_{{name}}'  => 'New {{Name}}',
+        'edit_{{name}}' => 'Edit {{Name}}',
+        'show_{{name}}' => 'Show {{Name}}',
+        'delete_{{name}}' => 'Delete {{Name}}',
+        'select_{{name}}' => 'Select {{Name}}',
+    ],
