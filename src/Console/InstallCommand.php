@@ -68,57 +68,57 @@ class InstallCommand extends Command
     protected function installDotzoneStarter()
     {
 
-        // // Show warning that if it's a not a fresh install, it will overwrite the files
-        // $this->components->warn('This command will overwrite the following files:');
-        // $this->components->warn('routes/web.php');
-        // $this->components->warn('resources/views');
-        // $this->components->warn('app/Providers/AppServiceProvider.php');
-        // $this->components->warn('app/Providers/RouteServiceProvider.php');
+        // Show warning that if it's a not a fresh install, it will overwrite the files
+        $this->components->warn('This command will overwrite the following files:');
+        $this->components->warn('routes/web.php');
+        $this->components->warn('resources/views');
+        $this->components->warn('app/Providers/AppServiceProvider.php');
+        $this->components->warn('app/Providers/RouteServiceProvider.php');
 
-        // // Ask for the Theme installation
-        // $theme = $this->components->choice(
-        //     'Which design theme you want to use?',
-        //     ['metronic'],
-        //     0
-        // );
-        // // Ask for the Role Permissions installation
-        // $role_permissions = $this->components->choice(
-        //     'Do you want to add role permissions?',
-        //     ['yes', 'no'],
-        //     1
-        // );
+        // Ask for the Theme installation
+        $theme = $this->components->choice(
+            'Which design theme you want to use?',
+            ['metronic'],
+            0
+        );
+        // Ask for the Role Permissions installation
+        $role_permissions = $this->components->choice(
+            'Do you want to add role permissions?',
+            ['yes', 'no'],
+            1
+        );
 
-        // // Install Laravel UI
-        // $this->components->info('Installing Laravel UI');
-        // $this->requireComposerPackages('laravel/ui:^4.0');
-        // $this->components->info('Laravel UI installed successfully');
+        // Install Laravel UI
+        $this->components->info('Installing Laravel UI');
+        $this->requireComposerPackages('laravel/ui:^4.0');
+        $this->components->info('Laravel UI installed successfully');
 
-        // // Check if the authentication scaffolding is already installed
-        // if (!file_exists(resource_path('views/auth'))) {
-        //     $this->components->info('Launching Laravel UI');
-        //     shell_exec("{$this->php_version} artisan ui bootstrap --auth");
-        //     $this->components->info('Laravel UI launched successfully');
-        // }
-        // else {
-        //     $this->components->info('UI scaffolding already installed');
-        // }
+        // Check if the authentication scaffolding is already installed
+        if (!file_exists(resource_path('views/auth'))) {
+            $this->components->info('Launching Laravel UI');
+            shell_exec("{$this->php_version} artisan ui bootstrap --auth");
+            $this->components->info('Laravel UI launched successfully');
+        }
+        else {
+            $this->components->info('UI scaffolding already installed');
+        }
 
-        // // Install Laravel Datatables
-        // $this->components->info('Installing Laravel Datatables');
-        // $this->requireComposerPackages('yajra/laravel-datatables-oracle');
-        // $this->components->info('Laravel Datatables installed successfully');
+        // Install Laravel Datatables
+        $this->components->info('Installing Laravel Datatables');
+        $this->requireComposerPackages('yajra/laravel-datatables-oracle');
+        $this->components->info('Laravel Datatables installed successfully');
 
-        // // Install tightenco/ziggy
-        // $this->components->info('Installing tightenco/ziggy');
-        // $this->requireComposerPackages('tightenco/ziggy');
-        // $this->components->info('tightenco/ziggy installed successfully');
+        // Install tightenco/ziggy
+        $this->components->info('Installing tightenco/ziggy');
+        $this->requireComposerPackages('tightenco/ziggy');
+        $this->components->info('tightenco/ziggy installed successfully');
 
-        // // Copy the routes file to the routes folder
-        // file_put_contents(
-        //     base_path('routes/web.php'),
-        //     file_get_contents(__DIR__ . '/../../resources/stubs/routes.stub'),
-        //     FILE_APPEND
-        // );
+        // Copy the routes file to the routes folder
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(__DIR__ . '/../../resources/stubs/routes.stub'),
+            FILE_APPEND
+        );
 
         // Delete the lang folder if it exists
         if (file_exists(base_path('lang'))) {
@@ -128,22 +128,22 @@ class InstallCommand extends Command
         // Copy the lang folder to the root folder
         (new Filesystem)->copyDirectory(__DIR__ . '/../../lang', base_path('lang'));
 
-        // // Copy the Controllers folder to the app/Http folder
-        // (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/scaffold/controllers', app_path('Http/Controllers/'));
-        // // Copy the AppServiceProvider.php file to the app/Providers folder
-        // copy(__DIR__ . '/../../resources/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
-        // // Copy the vite.config.js file to the root folder
-        // copy(__DIR__ . '/../../resources/vite.config.js', base_path('vite.config.js'));
-        // // Overwrite the default RouteServiceProvider.php file
-        // $this->overwriteServiceProviders();
-        // // Check if the user wants to install Laratrust
-        // if ($role_permissions === 'yes') $this->installLaratrust();
-        // // Check if the user wants to install Metronic Theme
-        // if ($theme === 'metronic') $this->replaceWithMetronicTheme();
-        // // Move the config/dotzone.php file to the config folder
-        // copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
-        // // Update the config/dotzone.php file to set the installed flag to true
-        // $this->updateDotzoneConfig($role_permissions);
+        // Copy the Controllers folder to the app/Http folder
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/scaffold/controllers', app_path('Http/Controllers/'));
+        // Copy the AppServiceProvider.php file to the app/Providers folder
+        copy(__DIR__ . '/../../resources/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+        // Copy the vite.config.js file to the root folder
+        copy(__DIR__ . '/../../resources/vite.config.js', base_path('vite.config.js'));
+        // Overwrite the default RouteServiceProvider.php file
+        $this->overwriteServiceProviders();
+        // Check if the user wants to install Laratrust
+        if ($role_permissions === 'yes') $this->installLaratrust();
+        // Check if the user wants to install Metronic Theme
+        if ($theme === 'metronic') $this->replaceWithMetronicTheme();
+        // Move the config/dotzone.php file to the config folder
+        copy(__DIR__ . '/../../config/dotzone.php', config_path('dotzone.php'));
+        // Update the config/dotzone.php file to set the installed flag to true
+        $this->updateDotzoneConfig($role_permissions);
     }
 
     /**
