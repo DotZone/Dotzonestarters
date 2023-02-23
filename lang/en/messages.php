@@ -220,5 +220,6 @@ return [
         'password_tips'    => 'Use 8 or more characters with a mix of letters, numbers & symbols.'
     ],
 
+    // New keys
 
 ];

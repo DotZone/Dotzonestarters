@@ -18,7 +18,7 @@ class PermissionGenerator extends BaseGenerator
         try {
 
             // Check if the permission flag is set to false
-            if (config('dotazone.cms.role_permission') == false) {
+            if (config('dotzone.cms.role_permission') == false) {
                 $this->config->commandWarn(dotzone_nl().'Permission flag is set to false, Skipping Adjustment.');
                 return;
             }
