@@ -2,7 +2,7 @@
 
 Package that contains all the basic files and folders that are needed to start a new project.
 
-Works only with the latest Laravel 9.
+Works only with the latest Laravel 9 for now.
 
 The package suggests to install [Laravel UI](https://github.com/laravel/ui) (Bootstrap) starter kit, and adds the chosen design theme on top, in addition to some features and generators.
 
@@ -17,14 +17,14 @@ This package should be used **immediately after installing Laravel**. If you add
 ## Usage
 
 1. Install fresh Laravel project
-2. Run `composer require DotZone/dotzonestarters --dev`
+2. Run `composer require dotzone/dotzonestarters --dev`
 3. Run `php artisan dotzone-starter:install` - it will show a wizard to choose the starter kit and the theme (options are listed below)
 4. To have **Role Permission** integradet into the starter kit, you just have to answer with *Yes* upon seeing the question after running the dotzone installer command.
 5. That's it, you have Laravel Auth starter, just visit the home page and click Log in / Register
 
 ### Developing within a container
 
-Internally this package runs several `php artisan` commands during the install process. This command may not work and the installation process hang if you are within a container. Alternatively, you may pass the `--php_version` flag to change this behaviour. For example: `php artisan dotzonestarters:install --php_version=./vendor/bin/sail`.
+Internally this package runs several `php artisan` commands during the install process. This command may not work and the installation process hang if you are within a container. Alternatively, you may pass the `--php_version` flag to change this behaviour. For example: `php artisan dotzone-starter:install --php_version=./vendor/bin/sail`.
 
 ## Generate code
 
