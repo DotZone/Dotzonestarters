@@ -8,9 +8,9 @@
         <a href="#features">Features</a> |
         <a href="https://dotzonegrp.com" target="_blank">Dotzone Group</a>
         <br/> <br/>
-        <a href="https://packagist.org/packages/LaravelDaily/Larastarters"><img alt="Laravel Version" src="https://img.shields.io/static/v1?label=laravel&message=%E2%89%A59.0&color=0078BE&logo=laravel&style=flat-square"></a>
-        <a href="https://packagist.org/packages/LaravelDaily/Larastarters"><img alt="Latest Version" src="https://img.shields.io/packagist/v/LaravelDaily/Larastarters"></a>
-        <a href="https://packagist.org/packages/LaravelDaily/Larastarters"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/LaravelDaily/Larastarters"></a>
+        <a href="packagist.org/packages/dotzone/dotzonestarters"><img alt="Laravel Version" src="https://img.shields.io/static/v1?label=laravel&message=%E2%89%A59.0&color=0078BE&logo=laravel&style=flat-square"></a>
+        <a href="packagist.org/packages/dotzone/dotzonestarters"><img alt="Latest Version" src="https://img.shields.io/packagist/v/dotzone/dotzonestarters"></a>
+        <a href="packagist.org/packages/dotzone/dotzonestarters"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/dotzone/dotzonestarters"></a>
   </p>
 </div>
 
@@ -49,17 +49,9 @@ Dotzonestarters requires PHP 8+ and Laravel 9+.
 
 2. Require Dotzonestarters as a dev dependency, run:
 
-<<<<<<< HEAD
     ```shell
     composer require dotzone/dotzonestarters:latest --dev
     ```
-=======
-1. Install fresh Laravel project
-2. Run `composer require dotzone/dotzonestarters:1.1.2 --dev`
-3. Run `php artisan dotzone-starter:install` - it will show a wizard to choose the starter kit and the theme (options are listed below)
-4. To have **Role Permission** integradet into the starter kit, you just have to answer with *Yes* upon seeing the question after running the dotzone installer command.
-5. That's it, you have Laravel Auth starter, just visit the home page and click Log in / Register
->>>>>>> a492dd0869cd606dfa6f800c7ad480ff3839beea
 
 3. Configure Dotzonestarters, run the command below:
 
