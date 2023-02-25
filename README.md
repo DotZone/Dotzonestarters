@@ -49,9 +49,17 @@ Dotzonestarters requires PHP 8+ and Laravel 9+.
 
 2. Require Dotzonestarters as a dev dependency, run:
 
+<<<<<<< HEAD
     ```shell
     composer require dotzone/dotzonestarters:latest --dev
     ```
+=======
+1. Install fresh Laravel project
+2. Run `composer require dotzone/dotzonestarters:1.1.2 --dev`
+3. Run `php artisan dotzone-starter:install` - it will show a wizard to choose the starter kit and the theme (options are listed below)
+4. To have **Role Permission** integradet into the starter kit, you just have to answer with *Yes* upon seeing the question after running the dotzone installer command.
+5. That's it, you have Laravel Auth starter, just visit the home page and click Log in / Register
+>>>>>>> a492dd0869cd606dfa6f800c7ad480ff3839beea
 
 3. Configure Dotzonestarters, run the command below:
 
