@@ -50,7 +50,7 @@ Dotzonestarters requires PHP 8+ and Laravel 9+.
 2. Require Dotzonestarters as a dev dependency, run:
 
     ```shell
-    composer require dotzone/dotzonestarters:latest --dev
+    composer require dotzone/dotzonestarters --dev
     ```
 
 3. Configure Dotzonestarters, run the command below:
