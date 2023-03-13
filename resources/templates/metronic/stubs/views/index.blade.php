@@ -18,7 +18,7 @@
                                 @permission('{{names}}-create')
                                 <a href="#" class="btn btn-primary fw-bolder" data-bs-target="#{{name}}_modal" data-bs-toggle="modal" onclick="initResetAdd{{Name}}Form()">
                                     <i class="fas fa-plus"></i>
-                                    {{__('messages.{{names}}.new_{{name}}')}}</a>
+                                    {{__('messages.{{name}}.new_{{name}}')}}</a>
                                 @endpermission
                             </div>
                         </div>

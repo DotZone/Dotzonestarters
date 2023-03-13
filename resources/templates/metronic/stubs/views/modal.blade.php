@@ -4,7 +4,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h2>{{ __('messages.{{names}}.new_{{name}}') }}</h2>
+                <h2>{{ __('messages.{{name}}.new_{{name}}') }}</h2>
                 <button type="button" aria-label="Close" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                     <span class="svg-icon svg-icon-1">
 						<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

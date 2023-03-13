@@ -53,10 +53,10 @@ class {{Name}}Controller extends BaseController
         try {
             // Create new {{name}}
             ${{name}} = {{Name}}::create($request->validated());
-            return $this->returnJsonResponse(true, __('messages.create_success'), 200);
+            return $this->responseJson(true, __('messages.create_success'),'', 200);
         }
         catch (\Exception $e) {
-            return $this->returnJsonResponse(false, __('messages.create_error'), Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
+            return $this->responseJsonError(__('messages.create_error'), $e->getMessage());
         }
     }
 
@@ -80,9 +80,9 @@ class {{Name}}Controller extends BaseController
     public function edit({{Name}} ${{name}}): JsonResponse
     {
         try {
-            return $this->returnJsonResponse(true, __('messages.data_retrieved_successfully'), Response::HTTP_OK, ${{name}});
+            return $this->responseJson(true, __('messages.data_retrieved_successfully'), ${{name}}, Response::HTTP_OK);
         } catch (\Exception $e) {
-            return $this->returnJsonResponse(false, __('messages.data_retrieved_error'), Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
+            return $this->responseJsonError(__('messages.data_retrieved_error'), $e->getMessage());
         }
     }
 
@@ -98,10 +98,10 @@ class {{Name}}Controller extends BaseController
         try {
             // Update author
             ${{name}}->update($request->validated());
-            return $this->returnJsonResponse(true, __('messages.update_success'), 200, ${{name}});
+            return $this->responseJson(true, __('messages.update_success'), ${{name}}, 200);
         }
         catch (\Exception $e) {
-            return $this->returnJsonResponse(false, __('messages.update_error'), Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
+            return $this->responseJsonError(__('messages.update_error'), $e->getMessage());
         }
     }
 
@@ -116,10 +116,10 @@ class {{Name}}Controller extends BaseController
         try {
             // Delete {{name}}
             ${{name}}->delete();
-            return $this->returnJsonResponse(true, __('messages.delete_success'));
+            return $this->responseJson(true, __('messages.delete_success'));
         }
         catch (\Exception $e) {
-            return $this->returnJsonResponse(false, __('messages.delete_error'), $e->getMessage());
+            return $this->responseJsonError(__('messages.delete_error'), $e->getMessage());
         }
     }
 }
